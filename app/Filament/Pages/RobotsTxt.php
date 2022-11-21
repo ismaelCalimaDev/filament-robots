@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\File;
 
@@ -32,5 +33,9 @@ class RobotsTxt extends Page implements Forms\Contracts\HasForms
     public function save()
     {
         File::replace(public_path('robots.txt'), $this->robots);
+        Notification::make()
+            ->title('Saved successfully')
+            ->success()
+            ->send();
     }
 }
